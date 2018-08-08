@@ -260,19 +260,27 @@ func (smtpWorker *SMTPWorker) getExecutorFromCommand(command SMTPCommand) IComma
 			GetLogger(smtpWorker.logLevel, smtpWorker.logFormat, "RSET Command Executor"),
 			smtpWorker.Writer,
 		)
+
 	case NOOP:
 		return NewNoopCommandExecutor(
 			GetLogger(smtpWorker.logLevel, smtpWorker.logFormat, "NOOP Command Executor"),
 			smtpWorker.Writer,
 		)
 
-
-	default:
+	case HELO:
 		return NewHelloCommandExecutor(
 			GetLogger(smtpWorker.logLevel, smtpWorker.logFormat, "HELO Command Executor"),
 			smtpWorker.Reader,
 			smtpWorker.Writer,
 		)
+
+	default:
+		return NewRsetCommandExecutor(
+			GetLogger(smtpWorker.logLevel, smtpWorker.logFormat, "RSET Command Executor"),
+			smtpWorker.Reader,
+			smtpWorker.Writer,
+		)
+
 	}
 }
 

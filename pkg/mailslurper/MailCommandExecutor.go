@@ -72,6 +72,7 @@ func (e *MailCommandExecutor) Process(streamInput string, mailItem *MailItem) er
 	}
 
 	mailItem.FromAddress = from
+	e.logger.Debugf("> %s", streamInput)
 	e.writer.SendOkResponse()
 
 	return nil

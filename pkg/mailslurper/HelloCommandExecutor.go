@@ -47,5 +47,7 @@ func (e *HelloCommandExecutor) Process(streamInput string, mailItem *MailItem) e
 		return fmt.Errorf("HELO command format is invalid")
 	}
 
+
+	e.logger.Debugf("> %s", streamInput)
 	return e.writer.SendHELOResponse()
 }

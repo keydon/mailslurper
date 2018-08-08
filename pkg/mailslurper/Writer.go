@@ -58,6 +58,8 @@ with any response.
 func (smtpWriter *SMTPWriter) SendResponse(response string) error {
 	var err error
 
+	smtpWriter.logger.Debugf("< %s", response)
+
 	if err = smtpWriter.Connection.SetWriteDeadline(time.Now().Add(time.Second * 2)); err != nil {
 		if !strings.Contains(err.Error(), "use of closed network connection") {
 			smtpWriter.logger.Errorf("Problem setting write deadline: %s", err.Error())
