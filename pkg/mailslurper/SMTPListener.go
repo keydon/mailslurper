@@ -139,8 +139,8 @@ func (s *SMTPListener) Dispatch(ctx context.Context) {
 				}
 
 				if err = s.connectionManager.New(connection); err != nil {
-					s.logger.WithError(err).Errorf("Error adding connection '%s' to connection manager", connection.RemoteAddr().String())
-					connection.Close()
+					s.logger.WithError(err).Warnf("Error adding connection '%s' to connection manager", connection.RemoteAddr().String())
+					// connection.Close()
 				}
 			}
 		}
